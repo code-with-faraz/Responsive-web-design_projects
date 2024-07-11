@@ -1,0 +1,12 @@
+img{
+  display:block;
+}
+
+#image{
+  max-width:100%;
+}
+
+body{
+  background-color:black;
+  color:white;
+}
