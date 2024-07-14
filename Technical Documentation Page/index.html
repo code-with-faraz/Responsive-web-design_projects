@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>Vue.js Documentation</header>
+      <ul>
+        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li>
+          <a class="nav-link" href="#What_you_should_already_know"
+            >What you should already know</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href="#Vue_Instance">Vue Instance</a>
+        </li>
+        <li><a class="nav-link" href="#Template_Syntax">Template Syntax</a></li>
+        <li><a class="nav-link" href="#Computed_Properties">Computed Properties</a></li>
+        <li>
+          <a class="nav-link" href="#Class_and_Style_Bindings">Class and Style Bindings</a>
+        </li>
+        <li><a class="nav-link" href="#Conditional_Rendering">Conditional Rendering</a></li>
+        <li>
+          <a class="nav-link" href="#List_Rendering">List Rendering</a>
+        </li>
+        <li><a class="nav-link" href="#Event_Handling">Event Handling</a></li>
+        <li><a class="nav-link" href="#Form_Input_Bindings">Form Input Bindings</a></li>
+        <li>
+          <a class="nav-link" href="#Components">Components</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Reactivity_Fundamentals">Reactivity Fundamentals</a>
+        </li>
+        <li><a class="nav-link" href="#Composition_API">Composition API</a></li>
+        <li><a class="nav-link" href="#Routing">Routing</a></li>
+        <li><a class="nav-link" href="#State_Management">State Management</a></li>
+        <li><a class="nav-link" href="#Server-Side_Rendering">Server-Side Rendering</a></li>
+        <li><a class="nav-link" href="#Reference">Reference</a></li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+        <article>
+          <p>
+            Vue.js is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable.
+          </p>
+          <p>
+            The core library focuses on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="What_you_should_already_know">
+        <header>What you should already know</header>
+        <article>
+          <p>This guide assumes you have the following basic background:</p>
+          <ul>
+            <li>A general understanding of the Internet and the World Wide Web (WWW).</li>
+            <li>Good working knowledge of JavaScript.</li>
+            <li>Some familiarity with HTML and CSS.</li>
+          </ul>
+        </article>
+      </section>
+      <section class="main-section" id="Vue_Instance">
+        <header>Vue Instance</header>
+        <article>
+          <p>
+            Every Vue application starts by creating a new Vue instance with the <code>Vue</code> function:
+          </p>
+          <code>
+            const vm = new Vue({
+              // options
+            })
+          </code>
+          <p>
+            When you create a Vue instance, you pass in an options object which can contain a variety of options for configuring the instance.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Template_Syntax">
+        <header>Template Syntax</header>
+        <article>
+          <p>
+            Vue.js uses an HTML-based template syntax that allows you to declaratively bind the rendered DOM to the underlying Vue instance’s data. All Vue.js templates are valid HTML that can be parsed by spec-compliant browsers and HTML parsers.
+          </p>
+          <p>
+            In Vue.js templates, we can use a special syntax to bind attributes and define behavior. The most basic form of data binding is text interpolation using the "Mustache" syntax (double curly braces):
+          </p>
+          <code>{{ message }}</code>
+        </article>
+      </section>
+      <section class="main-section" id="Computed_Properties">
+        <header>Computed Properties</header>
+        <article>
+          <p>
+            In-template expressions are very convenient, but they are meant for simple operations. Putting too much logic into your templates can make them bloated and hard to maintain. For any complex logic, you should use a computed property.
+          </p>
+          <code>
+            computed: {
+              reversedMessage: function () {
+                return this.message.split('').reverse().join('')
+              }
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Class_and_Style_Bindings">
+        <header>Class and Style Bindings</header>
+        <article>
+          <p>
+            A common need for data binding is manipulating an element’s class list and its inline styles. Since both of these attributes are attributes, we can use the <code>v-bind</code> directive to bind them to expressions.
+          </p>
+          <code>
+            <div v-bind:class="{ active: isActive }"></div>
+          </code>
+          <p>
+            The above syntax means the presence of the active class will be determined by the truthiness of the data property <code>isActive</code>.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Conditional_Rendering">
+        <header>Conditional Rendering</header>
+        <article>
+          <p>
+            We can use the <code>v-if</code> directive to conditionally render a block. The block will only be rendered if the directive’s expression returns a truthy value.
+          </p>
+          <code>
+            <p v-if="seen">Now you see me</p>
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="List_Rendering">
+        <header>List Rendering</header>
+        <article>
+          <p>
+            We can use the <code>v-for</code> directive to render a list of items by iterating over an array. The <code>v-for</code> directive requires a special syntax in the form of <code>item in items</code>, where items is the source data array and item is an alias for the array element being iterated on.
+          </p>
+          <code>
+            <ul>
+              <li v-for="item in items" :key="item.id">
+                {{ item.text }}
+              </li>
+            </ul>
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Event_Handling">
+        <header>Event Handling</header>
+        <article>
+          <p>
+            It’s easy to listen for DOM events using the <code>v-on</code> directive. You can use the <code>v-on</code> directive to listen to DOM events and run some JavaScript when they’re triggered.
+          </p>
+          <code>
+            <button v-on:click="doSomething">Click me</button>
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Form_Input_Bindings">
+        <header>Form Input Bindings</header>
+        <article>
+          <p>
+            You can use the <code>v-model</code> directive to create two-way data bindings on form input, textarea, and select elements. It automatically picks the correct way to update the element based on the input type. The <code>v-model</code> directive is essential for forms.
+          </p>
+          <code>
+            <input v-model="message" placeholder="edit me">
+            <p>Message is: {{ message }}</p>
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Components">
+        <header>Components</header>
+        <article>
+          <p>
+            Components are one of the most powerful features of Vue.js. They help you extend basic HTML elements to encapsulate reusable code. At a high level, components are custom elements to which the Vue.js compiler attaches behavior.
+          </p>
+          <code>
+            Vue.component('todo-item', {
+              props: ['todo'],
+              template: '<li>{{ todo.text }}</li>'
+            })
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Reactivity_Fundamentals">
+        <header>Reactivity Fundamentals</header>
+        <article>
+          <p>
+            One of Vue’s most distinct features is its unobtrusive reactivity system. Models are plain JavaScript objects. When you modify them, the view updates. This also makes state debugging easy, as it is always deterministic.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Composition_API">
+        <header>Composition API</header>
+        <article>
+          <p>
+            The Composition API is a set of additive, function-based APIs that allow flexible composition of component logic. It’s an alternative to the Options API used in most of our examples so far. This section will explain the basics of using the Composition API.
+          </p>
+          <code>
+            import { reactive, onMounted } from 'vue'
+            export default {
+              setup() {
+                const state = reactive({ count: 0 })
+                onMounted(() => {
+                  console.log(`The count is: ${state.count}`)
+                })
+                return {
+                  state
+                }
+              }
+            }
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Routing">
+        <header>Routing</header>
+        <article>
+          <p>
+            Vue Router is the official router for Vue.js. It deeply integrates with Vue.js core to make building Single Page Applications a breeze. Features include nested routes, dynamic routing, modular component structure, and more.
+          </p>
+          <code>
+            import Vue from 'vue'
+            import VueRouter from 'vue-router'
+            Vue.use(VueRouter)
+            const router = new VueRouter({
+              routes: [
+                { path: '/foo', component: Foo },
+                { path: '/bar', component: Bar }
+              ]
+            })
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="State_Management">
+        <header>State Management</header>
+        <article>
+          <p>
+            Vuex is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+          </p>
+          <code>
+            import Vue from 'vue'
+            import Vuex from 'vuex'
+            Vue.use(Vuex)
+            const store = new Vuex.Store({
+              state: {
+                count: 0
+              },
+              mutations: {
+                increment (state) {
+                  state.count++
+                }
+              }
+            })
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Server-Side_Rendering">
+        <header>Server-Side Rendering</header>
+        <article>
+          <p>
+            Server-Side Rendering (SSR) is the process of rendering your Vue components on the server and delivering HTML directly to the client. This allows for faster load times and better SEO.
+          </p>
+          <code>
+            const express = require('express')
+            const { createBundleRenderer } = require('vue-server-renderer')
+            const server = express()
+            const renderer = createBundleRenderer(serverBundle, {
+              runInNewContext: false,
+              template,
+              clientManifest
+            })
+          </code>
+        </article>
+      </section>
+      <section class="main-section" id="Reference">
+        <header>Reference</header>
+        <article>
+          <p>For more details, visit the official Vue.js documentation at <a href="https://vuejs.org">vuejs.org</a>.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
